@@ -11,9 +11,13 @@
    <title>Wallpapers-app</title>
 </head>
 <body>
-   <header>
-      <h1>Wallpapers</h1>
-      <form class="search-form">
+   <div class="loader-back">
+      <h3>Searching photos..</h3>
+      <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+   </div>
+   <header class="header">
+      <h1 class="header__text">Wallpapers</h1>
+      <form class="search-form" action="#">
          <div class="search-form__wrapper">
             <input class="search-form__input" type="text" placeholder="Search photos...">
             <button class="search-form__btn" type="submit">Search</button>
@@ -30,22 +34,26 @@
    </div>
 
    <section class="recent">
-      <h2>Recent photos</h2>
+      <img class="not-found hidden" src="./resources/images/not-found.png"/>
+      <h2 class="no-photos hidden">Sorry, nothing found.</h2>
+      <h2 class="gallery-title">Recent photos</h2>
       <ul class="recent-gallery">
-         <!-- <img class="recent-gallery__photo" src="./resources/images/background-img.jpg" alt="">
-         <img class="recent-gallery__photo" src="./resources/images/photo-2.jpg" alt="">
-         <img class="recent-gallery__photo" src="./resources/images/background-img.jpg" alt="">
-         <img class="recent-gallery__photo" src="./resources/images/photo-2.jpg" alt="">
-         <img class="recent-gallery__photo" src="./resources/images/photo-2.jpg" alt="">
-         <img class="recent-gallery__photo" src="./resources/images/background-img.jpg" alt="">
-         <img class="recent-gallery__photo" src="./resources/images/background-img.jpg" alt="">
-         <img class="recent-gallery__photo" src="./resources/images/photo-2.jpg" alt="">
-         <img class="recent-gallery__photo" src="./resources/images/photo-2.jpg" alt="">
-         <img class="recent-gallery__photo" src="./resources/images/photo-2.jpg" alt=""> -->
+         <!-- <img class="recent-gallery__photo" src="#" alt="">
+         <img class="recent-gallery__photo" src="#" alt=""> -->
       </ul>
+      <div class="pagination">
+         <a href="#">&laquo;</a>
+         <span class="page-numbers">
+            <a class="page-link active"href="#">1</a>
+            <a class="page-link" href="#">2</a>
+            <a class="page-link" href="#">3</a>
+            <a class="page-link" href="#">4</a>
+            <a class="page-link" href="#">5</a>
+         </span>
+         <a href="#">&raquo;</a>
    </section>
-   <footer>
-      <div class="">footer</div>
+   <footer class="footer">
+      <div>Designed by Aleksandar Zdravković 2022. All rights reserved.</div>
    </footer>
    <script src="./resources/js/app.js"></script>
 </body>
