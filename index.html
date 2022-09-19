@@ -11,47 +11,49 @@
    <title>Wallpapers-app</title>
 </head>
 <body>
-   <div class="loader-back">
-      <h3>Searching photos..</h3>
-      <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+   <div class="wrapper">
+      <div class="loader-back">
+         <h3>Searching photos..</h3>
+         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+      </div>
+      <header class="header">
+         <h1 class="header__text">Wallpapers</h1>
+         <form class="search-form" action="#">
+            <div class="search-form__wrapper">
+               <input class="search-form__input" type="text" placeholder="Search photos...">
+               <button class="search-form__btn" type="submit">Search</button>
+            </div>
+         </form>
+      </header>
+   
+      <div class="image-popup hidden">
+         <button class="image-popup__close-btn"></button>
+         <a href="#" class="image-popup__download-btn">download image</a>
+         <img src="" class="image-popup__large-img" alt="">
+         <button class="image-popup__controls pre-btn"><img src="./resources/images/pre.png" alt="Previous button"></button>
+         <button class="image-popup__controls next-btn"><img src="./resources/images/next.png" alt="Next button"></button>
+      </div>
+   
+      <section class="recent">
+         <img class="not-found hidden" src="./resources/images/not-found.png"/>
+         <h2 class="no-photos hidden">Sorry, nothing found.</h2>
+         <h2 class="gallery-title">Recent photos</h2>
+         <ul class="recent-gallery">
+            <!-- <img class="recent-gallery__photo" src="#" alt="">
+            <img class="recent-gallery__photo" src="#" alt=""> -->
+         </ul>
+         <div class="pagination">
+            <a href="#">&laquo;</a>
+            <span class="page-numbers">
+               <a class="page-link active"href="#">1</a>
+               <a class="page-link" href="#">2</a>
+               <a class="page-link" href="#">3</a>
+               <a class="page-link" href="#">4</a>
+               <a class="page-link" href="#">5</a>
+            </span>
+            <a href="#">&raquo;</a>
+      </section>
    </div>
-   <header class="header">
-      <h1 class="header__text">Wallpapers</h1>
-      <form class="search-form" action="#">
-         <div class="search-form__wrapper">
-            <input class="search-form__input" type="text" placeholder="Search photos...">
-            <button class="search-form__btn" type="submit">Search</button>
-         </div>
-      </form>
-   </header>
-
-   <div class="image-popup hidden">
-      <button class="image-popup__close-btn"></button>
-      <a href="#" class="image-popup__download-btn">download image</a>
-      <img src="" class="image-popup__large-img" alt="">
-      <button class="image-popup__controls pre-btn"><img src="./resources/images/pre.png" alt="Previous button"></button>
-      <button class="image-popup__controls next-btn"><img src="./resources/images/next.png" alt="Next button"></button>
-   </div>
-
-   <section class="recent">
-      <img class="not-found hidden" src="./resources/images/not-found.png"/>
-      <h2 class="no-photos hidden">Sorry, nothing found.</h2>
-      <h2 class="gallery-title">Recent photos</h2>
-      <ul class="recent-gallery">
-         <!-- <img class="recent-gallery__photo" src="#" alt="">
-         <img class="recent-gallery__photo" src="#" alt=""> -->
-      </ul>
-      <div class="pagination">
-         <a href="#">&laquo;</a>
-         <span class="page-numbers">
-            <a class="page-link active"href="#">1</a>
-            <a class="page-link" href="#">2</a>
-            <a class="page-link" href="#">3</a>
-            <a class="page-link" href="#">4</a>
-            <a class="page-link" href="#">5</a>
-         </span>
-         <a href="#">&raquo;</a>
-   </section>
    <footer class="footer">
       <div>Designed by Aleksandar Zdravković 2022. All rights reserved.</div>
    </footer>
