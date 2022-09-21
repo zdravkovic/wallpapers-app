@@ -41,13 +41,14 @@ body {
 }
 
 /****** HEADER ******/
-.back-to-top{
-   display: block;
+.back-to-top {
+   display: none;
    position: fixed;
    width: 7rem;
    height: 7rem;
    bottom: 7rem;
    right: 6.8rem;
+   opacity: 90%;
    z-index: 1000;
    
 }
@@ -581,6 +582,11 @@ footer {
 
    header {
       height: 47rem;
+   }
+
+   .back-to-top {
+      right: 2.8rem;
+      bottom: 3rem;
    }
 
    .search-form__wrapper {
