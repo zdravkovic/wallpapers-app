@@ -1,3 +1,4 @@
+
 // api key
 const api = {
    clientId: 'iiPfxlpEEdZNtRBIbultavmXU6rjDfd_00yRNbubj_A',
@@ -8,8 +9,6 @@ const recentUrl = `https://api.unsplash.com/photos/?page=1&per_page=20&client_id
 const randomPhotoUrl = `https://api.unsplash.com/photos/random/?query=mountains&orientation=landscape&client_id=${api.clientId}`;
 const searchUrl = `https://api.unsplash.com/search/photos/?per_page=30&client_id=${api.clientId}`;
 
-// page number
-const page = 1;
 
 
 // select elements in DOM
@@ -27,12 +26,19 @@ const noPhotos = document.querySelector('.no-photos');
 const notFound = document.querySelector('.not-found');
 const loader = document.querySelector('.loader-back');
 const popup = document.querySelector('.image-popup');
+const pages = document.querySelectorAll('.page-link');
+const button = document.querySelector('.button');
+const nextPage = document.querySelector('.next-page');
+
+
+
 
 // declare variables
 let currentImage = 0;
 let imageData;
 let searchQuery;
 let searchImages;
+let currentPage = 1;
 
 
 const submitSearch = () => {
@@ -58,9 +64,9 @@ const submitSearch = () => {
 }
 
 
-const searchPhoto = async (query) => {
+const searchPhoto = async (query, page) => {
    try {
-      await fetch(`${searchUrl}&query=${query}`)
+      await fetch(`${searchUrl}&page=${page}&query=${query}`)
       .then(res => res.json())
       .then(data => {
          // save data to a variable
@@ -104,6 +110,59 @@ const searchPhoto = async (query) => {
       console.error(error);
    }
 }
+
+
+   button.addEventListener('click', (e2) => {
+      e2.preventDefault();
+
+      e2.target.classList.add('active');
+
+      currentPage++;
+
+      searchPhoto(searchQuery, currentPage);
+   });
+/* 
+const pageNumber = (total, max, current) => {
+   const half = Math.round(max / 2);
+   let to = max;
+
+   if (current + half >= total) {
+      to = total;
+   } else if (current > half) {
+      to = current + half;
+   }
+
+   let from = to - max;
+
+   return Array.from({length: max}, (_,i) => (i + 1) + from);
+}
+ */
+
+
+/* pages.forEach((el,i) => {
+   el.textContent = pageNumber(100, 6, currentPage)[i];
+   el.addEventListener('click', (e2) => {
+      e2.preventDefault();
+
+      currentPage = e2.target.textContent;
+      
+      for (let j = 0; j < el.parentNode.children.length; j++) {
+         el.parentNode.children[j].classList.remove('active');
+      }
+
+      e2.target.classList.add('active');
+
+      imageData = [];
+      // clear last search
+      recentPhotos.innerHTML = '';
+      
+      pagination.style.display = 'none';
+      // add loader
+      loader.style.display = 'block';
+
+      searchPhoto(searchQuery, currentPage);
+   });
+}) */
 
 const recentPhotosHandler = async () => {
    try {
@@ -223,8 +282,27 @@ nextBtn.addEventListener('click', () => {
 });
 console.log()
 
+const mybutton = document.querySelector(".back-to-top");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
 
 const init = () => {
+
    // list recent photos
    recentPhotosHandler();
    // search for some photo
