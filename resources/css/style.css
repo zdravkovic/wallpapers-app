@@ -640,4 +640,8 @@ footer {
       -o-transition: width 0s;
       transition: width 0s;
    }
+
+   .recent-gallery {
+      padding: 1.5rem 2.5rem;
+   }
 }
