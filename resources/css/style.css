@@ -44,10 +44,10 @@ body {
 .header {
    height: 55rem;
    background-image: 
-      -webkit-gradient(linear, left top, left bottom, color-stop(60%, rgba(19, 26, 61, 0.8)), to(rgb(28, 31, 46))),
+      -o-linear-gradient(rgba(19, 26, 61, 0.8) 60%, rgb(28, 31, 46)),
       url("../images/background-img.jpg");
    background-image: 
-      -o-linear-gradient(rgba(19, 26, 61, 0.8) 60%, rgb(28, 31, 46)),
+      -webkit-gradient(linear, left top, left bottom, color-stop(60%, rgba(19, 26, 61, 0.8)), to(rgb(28, 31, 46))),
       url("../images/background-img.jpg");
    background-image: 
       linear-gradient(rgba(19, 26, 61, 0.8) 60%, rgb(28, 31, 46)),
@@ -177,10 +177,18 @@ body {
 .recent-gallery {
    list-style: none;
    padding: 1.5rem 6.5rem;
-   display: -ms-grid;
-   display: grid;
-   -ms-grid-columns: (minmax(20rem, 1fr));
-   grid-template-columns: repeat(5, minmax(20rem, 1fr));
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -ms-flex-wrap: wrap;
+       flex-wrap: wrap;
+}
+
+.recent-gallery__item {
+   -webkit-box-flex: 1;
+       -ms-flex: 1 1 20%;
+           flex: 1 1 20%;
+   min-width: 15rem;
 }
 
 .recent-gallery__photo {
@@ -491,9 +499,10 @@ footer {
 
 
 @media only screen and (max-width: 1440px) {
-   .recent-gallery {
-      -ms-grid-columns: (minmax(20rem, 1fr));
-      grid-template-columns: repeat(4, minmax(20rem, 1fr));
+   .recent-gallery__item {
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 25%;
+              flex: 1 1 25%;
    }
 
    .recent-gallery__photo {
@@ -511,9 +520,10 @@ footer {
       font-size: 2.3rem;
    }
 
-   .recent-gallery {
-      -ms-grid-columns: (minmax(20rem, 1fr));
-      grid-template-columns: repeat(3, minmax(20rem, 1fr));
+   .recent-gallery__item {
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 33.333%;
+              flex: 1 1 33.333%;
    }
 
    .recent-gallery__photo {
@@ -568,9 +578,10 @@ footer {
       padding: 15px 20px;
    }
 
-   .recent-gallery {
-      -ms-grid-columns: (minmax(20rem, 1fr));
-      grid-template-columns: repeat(2, minmax(20rem, 1fr));
+   .recent-gallery__item {
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 50%;
+              flex: 1 1 50%;
    }
 
    .recent-gallery__photo {

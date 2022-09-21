@@ -123,6 +123,11 @@ const recentPhotosHandler = async () => {
 
 const makeImages = (images, cl) => {
    images.forEach((item, index) => {
+      
+      // cleate new parent element
+      let imageParent = document.createElement('div');
+      // give parent element class
+      imageParent.className = 'recent-gallery__item'
       // create single img element
       let singleImage = document.createElement('img');
       // give image src attribute from data
@@ -130,8 +135,10 @@ const makeImages = (images, cl) => {
       // add class to img element
       singleImage.className = cl;
 
+      imageParent.appendChild(singleImage);
+
       // append as child element in DOM
-      recentPhotos.appendChild(singleImage);
+      recentPhotos.appendChild(imageParent);
 
       // add click listener
       singleImage.addEventListener('click', () => {
