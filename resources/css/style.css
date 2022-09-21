@@ -505,9 +505,9 @@ footer {
               flex: 1 1 25%;
    }
 
-   .recent-gallery__photo {
-      height: 20rem;
-      min-height: 10rem;
+   .recent-gallery::after {
+      content: "";
+      flex-grow: 999;
    }
 }
 
