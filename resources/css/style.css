@@ -120,6 +120,12 @@ body {
    outline:none;
 }
 
+.search-form__input:focus::-webkit-input-placeholder { color:transparent; }
+.search-form__input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+.search-form__input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+.search-form__input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+
+
 .search-form__btn {
    border: none;
    border-radius: 0 7px 7px 0;
