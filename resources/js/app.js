@@ -1,4 +1,3 @@
-
 // api key
 const api = {
    clientId: 'iiPfxlpEEdZNtRBIbultavmXU6rjDfd_00yRNbubj_A',
@@ -29,8 +28,7 @@ const popup = document.querySelector('.image-popup');
 const pages = document.querySelectorAll('.page-link');
 const button = document.querySelector('.button');
 const nextPage = document.querySelector('.next-page');
-
-
+const homeIcon = document.querySelector('.home-icon');
 
 
 // declare variables
@@ -58,11 +56,12 @@ const submitSearch = () => {
       pagination.style.display = 'none';
       // add loader
       loader.style.display = 'block';
+      //
+      homeIcon.style.display = 'block';
       // do the search
       searchPhoto(searchQuery);
    });
 }
-
 
 const searchPhoto = async (query, page) => {
    try {
@@ -82,6 +81,8 @@ const searchPhoto = async (query, page) => {
             galleryTitle.textContent = `Photos of ${query}`;
 
             // change DOM element styles
+            changeSearchIcon();
+            searchForm.classList.add('searched');
             headerText.style.display = 'none';
             galleryTitle.classList.remove('hidden');
             noPhotos.classList.add('hidden');
@@ -95,6 +96,8 @@ const searchPhoto = async (query, page) => {
 
          } else {
             // change DOM element styles
+            changeSearchIcon();
+            searchForm.classList.add('searched');
             headerText.style.display = 'none';
             galleryTitle.classList.add('hidden');
             noPhotos.classList.remove('hidden');
@@ -111,58 +114,15 @@ const searchPhoto = async (query, page) => {
    }
 }
 
+button.addEventListener('click', (e2) => {
+   e2.preventDefault();
 
-   button.addEventListener('click', (e2) => {
-      e2.preventDefault();
+   e2.target.classList.add('active');
 
-      e2.target.classList.add('active');
+   currentPage++;
 
-      currentPage++;
-
-      searchPhoto(searchQuery, currentPage);
-   });
-/* 
-const pageNumber = (total, max, current) => {
-   const half = Math.round(max / 2);
-   let to = max;
-
-   if (current + half >= total) {
-      to = total;
-   } else if (current > half) {
-      to = current + half;
-   }
-
-   let from = to - max;
-
-   return Array.from({length: max}, (_,i) => (i + 1) + from);
-}
- */
-
-
-/* pages.forEach((el,i) => {
-   el.textContent = pageNumber(100, 6, currentPage)[i];
-   el.addEventListener('click', (e2) => {
-      e2.preventDefault();
-
-      currentPage = e2.target.textContent;
-      
-      for (let j = 0; j < el.parentNode.children.length; j++) {
-         el.parentNode.children[j].classList.remove('active');
-      }
-
-      e2.target.classList.add('active');
-
-      imageData = [];
-      // clear last search
-      recentPhotos.innerHTML = '';
-      
-      pagination.style.display = 'none';
-      // add loader
-      loader.style.display = 'block';
-
-      searchPhoto(searchQuery, currentPage);
-   });
-}) */
+   searchPhoto(searchQuery, currentPage);
+});
 
 const recentPhotosHandler = async () => {
    try {
@@ -213,9 +173,12 @@ const showPopup = (item) => {
    const downloadBtn = document.querySelector('.image-popup__download-btn');
    const closeBtn = document.querySelector('.image-popup__close-btn');
    const image = document.querySelector('.image-popup__large-img');
+   const background = document.querySelector('.image-popup__background');
 
    // unhide element by removing class 'hidden'
    popup.classList.remove('hidden');
+   // unhide popup background
+   background.style.display = 'block';
    // set href attribute for download button
    downloadBtn.href = item.links.html;
    // set src attribute from data
@@ -225,15 +188,17 @@ const showPopup = (item) => {
    closeBtn.addEventListener('click', () => {
       // hide popup by adding class 'hidden'
       popup.classList.add('hidden');
-   })
+      //hide popup background
+      background.style.display = 'none';
+   });
 }
-
-// Controls for viewing images
 
 // select button elements in DOM
 const preBtn = document.querySelector('.pre-btn');
 const nextBtn = document.querySelector('.next-btn');
 
+
+// view images on popup with arows
 document.addEventListener('keydown', (e)=> {
    if (e.key === 'ArrowLeft') {
       if (!popup.classList.contains('hidden')) {
@@ -247,7 +212,7 @@ document.addEventListener('keydown', (e)=> {
    }
 });
 
-
+// view images on popup with arows
 document.addEventListener('keydown', (e)=> {
    if (e.key === 'ArrowRight') {
       if (!popup.classList.contains('hidden')) {
@@ -270,8 +235,9 @@ preBtn.addEventListener('click', () => {
       // show current image
       showPopup(imageData[currentImage]);
    }
-})
+});
 
+// add click listener
 nextBtn.addEventListener('click', () => {
    if(currentImage < imageData.length - 1) {
       // if current index is smaller than length of whole array add + 1 to index
@@ -280,23 +246,29 @@ nextBtn.addEventListener('click', () => {
       showPopup(imageData[currentImage]);
    }
 });
-console.log()
 
-const mybutton = document.querySelector(".back-to-top");
+const backToTopButton = document.querySelector(".back-to-top");
+
+const changeSearchIcon = () => {
+   searchBtn.innerHTML = '';
+   const img = `<img class="search-icon" src="./resources//images/search.png" alt="seach-icon">`;
+
+   searchBtn.insertAdjacentHTML('beforeend', img);
+}
 
 // When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+window.onscroll = () => {scrollFunction()};
 
-function scrollFunction() {
+const scrollFunction = () => {
   if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-    mybutton.style.display = "block";
+    backToTopButton.style.display = "block";
   } else {
-    mybutton.style.display = "none";
+    backToTopButton.style.display = "none";
   }
 }
 
 // When the user clicks on the button, scroll to the top of the document
-function topFunction() {
+const topFunction = () => {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }

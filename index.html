@@ -12,27 +12,32 @@
 </head>
 <body>
    <div class="wrapper">
-      <img onclick="topFunction()" class="back-to-top" src="./resources/images/up-arrow.png" alt="up-arrow">
       <div class="loader-back">
          <h3>Searching photos..</h3>
          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
       </div>
+      <img onclick="topFunction()" class="back-to-top" src="./resources/images/up-arrow.png" alt="up-arrow">
       <header class="header">
          <h1 class="header__text">Wallpapers</h1>
          <form class="search-form" action="#">
             <div class="search-form__wrapper">
+               <a class="home-icon" href="/">
+                  <img class="home-icon__img" src="./resources/images/home.png" alt="home icon">
+               </a>
                <input class="search-form__input" type="text" placeholder="Search photos...">
-               <button class="search-form__btn" type="submit">Search</button>
+               <button class="search-form__btn" type="submit"><p>Search</p></button>
             </div>
          </form>
       </header>
    
       <div class="image-popup hidden">
-         <button class="image-popup__close-btn"></button>
+         <button class="image-popup__close-btn"><img src="./resources/images/close.png" alt="close button"></button>
          <a href="#" class="image-popup__download-btn">download image</a>
          <img src="" class="image-popup__large-img" alt="">
          <button class="image-popup__controls pre-btn"><img src="./resources/images/pre.png" alt="Previous button"></button>
          <button class="image-popup__controls next-btn"><img src="./resources/images/next.png" alt="Next button"></button>
+      </div>
+      <div class="image-popup__background">
       </div>
    
       <section class="recent">
