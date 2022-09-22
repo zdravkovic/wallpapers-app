@@ -35,7 +35,6 @@ const homeIcon = document.querySelector('.home-icon');
 let currentImage = 0;
 let imageData;
 let searchQuery;
-let searchImages;
 let currentPage = 1;
 
 
@@ -153,7 +152,7 @@ const makeImages = (images, cl) => {
       singleImage.src = item.urls.regular;
       // add class to img element
       singleImage.className = cl;
-
+      // append single image to parent element
       imageParent.appendChild(singleImage);
 
       // append as child element in DOM
@@ -193,7 +192,7 @@ const showPopup = (item) => {
    });
 }
 
-// select button elements in DOM
+// select buttons elements in DOM
 const preBtn = document.querySelector('.pre-btn');
 const nextBtn = document.querySelector('.next-btn');
 
@@ -247,16 +246,19 @@ nextBtn.addEventListener('click', () => {
    }
 });
 
-const backToTopButton = document.querySelector(".back-to-top");
-
+// instead of 'search' text show search icon
 const changeSearchIcon = () => {
    searchBtn.innerHTML = '';
    const img = `<img class="search-icon" src="./resources//images/search.png" alt="seach-icon">`;
-
+   
    searchBtn.insertAdjacentHTML('beforeend', img);
 }
 
-// When the user scrolls down 20px from the top of the document, show the button
+
+const backToTopButton = document.querySelector(".back-to-top");
+
+
+// when the user scrolls down 20px from the top of the document, show the button
 window.onscroll = () => {scrollFunction()};
 
 const scrollFunction = () => {
@@ -267,7 +269,7 @@ const scrollFunction = () => {
   }
 }
 
-// When the user clicks on the button, scroll to the top of the document
+// when the user clicks on the button, scroll to the top of the document
 const topFunction = () => {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera

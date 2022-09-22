@@ -48,7 +48,16 @@ body {
    bottom: 7rem;
    right: 6.8rem;
    opacity: 90%;
+   cursor: pointer;
    z-index: 1000;
+   -webkit-transition: all .3s;
+   -o-transition: all .3s;
+   transition: all .3s;
+}
+
+.back-to-top:hover {
+   background-color: white;
+   padding: .3rem .15rem;
 }
 
 /****** HEADER ******/
@@ -156,6 +165,7 @@ body {
 
 .search-form__btn {
    border: none;
+   cursor: pointer;
    border-radius: 0 7px 7px 0;
    font-size: 2rem;
    padding: 15px 30px;
@@ -573,7 +583,9 @@ footer {
 
    .recent-gallery::after {
       content: "";
-      flex-grow: 999;
+      -webkit-box-flex: 999;
+          -ms-flex-positive: 999;
+              flex-grow: 999;
    }
 }
 
@@ -676,7 +688,9 @@ footer {
 
 @media only screen and (max-width: 620px) {
    .search-form.searched {
-      justify-content: flex-end;
+      -webkit-box-pack: end;
+          -ms-flex-pack: end;
+              justify-content: flex-end;
       padding-right: 2.8rem;
    }
 
@@ -698,7 +712,9 @@ footer {
       -webkit-box-direction: normal;
           -ms-flex-direction: row;
               flex-direction: row;
-      justify-content: flex-end;
+      -webkit-box-pack: end;
+          -ms-flex-pack: end;
+              justify-content: flex-end;
    }
 
    .search-form__input {
