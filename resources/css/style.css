@@ -62,11 +62,11 @@ body {
 }
 
 .home-icon__img {
-   position: fixed;
-   width: 5rem;
-   height: 5rem;
+   position: absolute;
+   width: 3.8rem;
+   height: 3.8rem;
+   top: 3rem;
    left: 2.5rem;
-   top: 2.5rem;
 } 
 
 .header {
