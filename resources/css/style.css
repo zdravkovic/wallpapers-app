@@ -404,6 +404,7 @@ body {
 }
 
 .pagination button {
+   cursor: pointer;
    color: var(--white);
    background-color: var(--light-blue);
    border: none;
