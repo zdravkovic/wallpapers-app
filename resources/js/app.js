@@ -5,7 +5,6 @@ const api = {
 
 // api urls
 const recentUrl = `https://api.unsplash.com/photos/?page=1&per_page=20&client_id=${api.clientId}`;
-const randomPhotoUrl = `https://api.unsplash.com/photos/random/?query=mountains&orientation=landscape&client_id=${api.clientId}`;
 const searchUrl = `https://api.unsplash.com/search/photos/?per_page=30&client_id=${api.clientId}`;
 
 
