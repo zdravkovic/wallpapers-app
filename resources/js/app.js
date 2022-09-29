@@ -54,8 +54,10 @@ const submitSearch = () => {
       pagination.style.display = 'none';
       // add loader
       loader.style.display = 'block';
-      //
+      // add home icon
       homeIcon.style.display = 'block';
+      //remove focus from input
+      searchInput.blur();
       // do the search
       searchPhoto(searchQuery);
    });
