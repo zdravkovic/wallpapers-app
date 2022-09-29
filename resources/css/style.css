@@ -461,7 +461,9 @@ footer {
 
 .loader-back h3 {
    position: absolute;
+   text-align: center;
    font-size: 2.5rem;
+   width: 23ch;
    top: 28rem;
    left: 50%;
    -webkit-transform: translateX(-50%);
