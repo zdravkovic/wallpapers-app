@@ -25,9 +25,10 @@ const notFound = document.querySelector('.not-found');
 const loader = document.querySelector('.loader-back');
 const popup = document.querySelector('.image-popup');
 const pages = document.querySelectorAll('.page-link');
-const button = document.querySelector('.button');
+const loadMoreBtn = document.querySelector('.button');
 const nextPage = document.querySelector('.next-page');
 const homeIcon = document.querySelector('.home-icon');
+const backToTopButton = document.querySelector(".back-to-top");
 
 
 // declare variables
@@ -114,11 +115,10 @@ const searchPhoto = async (query, page) => {
    }
 }
 
-button.addEventListener('click', (e2) => {
+// Add click listener to Load More button
+loadMoreBtn.addEventListener('click', (e2) => {
    e2.preventDefault();
-
-   e2.target.classList.add('active');
-
+   // Load second page content
    currentPage++;
 
    searchPhoto(searchQuery, currentPage);
@@ -141,8 +141,8 @@ const recentPhotosHandler = async () => {
 }
 
 const makeImages = (images, cl) => {
+   console.log(images);
    images.forEach((item, index) => {
-      
       // cleate new parent element
       let imageParent = document.createElement('div');
       // give parent element class
@@ -150,7 +150,7 @@ const makeImages = (images, cl) => {
       // create single img element
       let singleImage = document.createElement('img');
       // give image src attribute from data
-      singleImage.src = item.urls.regular;
+      singleImage.src = item.urls.small_s3;
       // add class to img element
       singleImage.className = cl;
       // append single image to parent element
@@ -249,15 +249,13 @@ nextBtn.addEventListener('click', () => {
 
 // instead of 'search' text show search icon
 const changeSearchIcon = () => {
+   // clear button text
    searchBtn.innerHTML = '';
+   // make icon
    const img = `<img class="search-icon" src="./resources//images/search.png" alt="seach-icon">`;
-   
+   // add seach icon to button
    searchBtn.insertAdjacentHTML('beforeend', img);
 }
-
-
-const backToTopButton = document.querySelector(".back-to-top");
-
 
 // when the user scrolls down 20px from the top of the document, show the button
 window.onscroll = () => {scrollFunction()};
