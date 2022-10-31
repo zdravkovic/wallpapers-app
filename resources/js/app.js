@@ -150,7 +150,7 @@ const makeImages = (images, cl) => {
       // create single img element
       let singleImage = document.createElement('img');
       // give image src attribute from data
-      singleImage.src = item.urls.small_s3;
+      singleImage.src = item.urls.small;
       // add class to img element
       singleImage.className = cl;
       // append single image to parent element
