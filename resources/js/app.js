@@ -184,6 +184,11 @@ const showPopup = (item) => {
    // set src attribute from data
    image.src = item.urls.regular;
 
+   background.addEventListener('click', () => {
+      popup.classList.add('hidden');
+      background.style.display = 'none';
+   })
+
    // add click listener to close button
    closeBtn.addEventListener('click', () => {
       // hide popup by adding class 'hidden'
