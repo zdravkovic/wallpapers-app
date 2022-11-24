@@ -141,7 +141,7 @@ const recentPhotosHandler = async () => {
 }
 
 const makeImages = (images, cl) => {
-   console.log(images);
+
    images.forEach((item, index) => {
       // cleate new parent element
       let imageParent = document.createElement('div');
