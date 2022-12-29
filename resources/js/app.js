@@ -8,7 +8,6 @@ const recentUrl = `https://api.unsplash.com/photos/?page=1&per_page=20&client_id
 const searchUrl = `https://api.unsplash.com/search/photos/?per_page=30&client_id=${api.clientId}`;
 
 
-
 // select elements in DOM
 const searchInput = document.querySelector('.search-form__input');
 const searchBtn = document.querySelector('.search-form__btn');
@@ -28,13 +27,16 @@ const pages = document.querySelectorAll('.page-link');
 const loadMoreBtn = document.querySelector('.button');
 const nextPage = document.querySelector('.next-page');
 const homeIcon = document.querySelector('.home-icon');
-const backToTopButton = document.querySelector(".back-to-top");
+const backToTopButton = document.querySelector('.back-to-top');
+const categoryBox = document.querySelectorAll('.category-box');
+const category = document.querySelector('.category');
 
 
 // declare variables
 let currentImage = 0;
 let imageData;
 let searchQuery;
+let selectedTopic;
 let currentPage = 1;
 
 
@@ -64,52 +66,56 @@ const submitSearch = () => {
    });
 }
 
+const displayImages = (data, query) => {
+   // save data to a variable
+   imageData = data;
+   // hide loader
+   loader.style.display = 'none';
+
+   if (imageData.length > 0) {
+      // make images using data
+      makeImages(imageData, 'recent-gallery__photo');
+
+      // change section title based on search query
+      galleryTitle.textContent = `Photos of ${query}`;
+
+      // change DOM element styles
+      changeSearchIcon();
+      searchForm.classList.add('searched');
+      headerText.style.display = 'none';
+      galleryTitle.classList.remove('hidden');
+      noPhotos.classList.add('hidden');
+      notFound.classList.add('hidden');
+      headerElement.classList.add('search-header');
+      searchWrap.classList.add('search-wrap');
+      searchBtn.classList.add('searched-btn');
+      searchInput.classList.add('searched-input');
+      recentGallery.style.height = 'auto';
+      pagination.style.display = 'flex';
+
+   } else {
+      // change DOM element styles
+      changeSearchIcon();
+      searchForm.classList.add('searched');
+      headerText.style.display = 'none';
+      galleryTitle.classList.add('hidden');
+      noPhotos.classList.remove('hidden');
+      notFound.classList.remove('hidden');
+      headerElement.classList.add('search-header');
+      searchWrap.classList.add('search-wrap');
+      searchBtn.classList.add('searched-btn');
+      searchInput.classList.add('searched-input');
+      recentGallery.style.height = 'auto';
+   }
+}
+
 const searchPhoto = async (query, page) => {
    try {
-      await fetch(`${searchUrl}&page=${page}&query=${query}`)
-      .then(res => res.json())
-      .then(data => {
-         // save data to a variable
-         imageData = data.results;
-         // hide loader
-         loader.style.display = 'none';
+      const searchHandler = await fetch(`${searchUrl}&page=${page}&query=${query}`);
+      const searchResults = await searchHandler.json();
+      // display images using search results
+      displayImages(searchResults.results, query);
 
-         if (imageData.length > 0) {
-            // make images using data
-            makeImages(imageData, 'recent-gallery__photo');
-
-            // change section title based on search query
-            galleryTitle.textContent = `Photos of ${query}`;
-
-            // change DOM element styles
-            changeSearchIcon();
-            searchForm.classList.add('searched');
-            headerText.style.display = 'none';
-            galleryTitle.classList.remove('hidden');
-            noPhotos.classList.add('hidden');
-            notFound.classList.add('hidden');
-            headerElement.classList.add('search-header');
-            searchWrap.classList.add('search-wrap');
-            searchBtn.classList.add('searched-btn');
-            searchInput.classList.add('searched-input');
-            recentGallery.style.height = 'auto';
-            pagination.style.display = 'flex';
-
-         } else {
-            // change DOM element styles
-            changeSearchIcon();
-            searchForm.classList.add('searched');
-            headerText.style.display = 'none';
-            galleryTitle.classList.add('hidden');
-            noPhotos.classList.remove('hidden');
-            notFound.classList.remove('hidden');
-            headerElement.classList.add('search-header');
-            searchWrap.classList.add('search-wrap');
-            searchBtn.classList.add('searched-btn');
-            searchInput.classList.add('searched-input');
-            recentGallery.style.height = 'auto';
-         }
-      })
    } catch(error) {
       console.error(error);
    }
@@ -118,23 +124,65 @@ const searchPhoto = async (query, page) => {
 // Add click listener to Load More button
 loadMoreBtn.addEventListener('click', (e2) => {
    e2.preventDefault();
-   // Load second page content
+   // load second page content
    currentPage++;
-
-   searchPhoto(searchQuery, currentPage);
+   // check if button should list search photos or topic photos
+   if (searchQuery.length > 0) {
+      searchPhoto(searchQuery, currentPage);
+   } else {
+      topicPhotos(selectedTopic, currentPage);
+   }
 });
 
 const recentPhotosHandler = async () => {
    try {
-      //fetch data from api with client ID
-      await fetch(recentUrl)
-      .then(res => res.json())
-      .then(data => {
-         // save data to variable
-         imageData = data;
-         // create images using saved data
-         makeImages(imageData, 'recent-gallery__photo');
-      });
+      // fetch data from api with client ID
+      const recentPhotosHandler = await fetch(recentUrl)
+      const recentPhotosResults = await recentPhotosHandler.json();
+      // save data to variable
+      imageData = recentPhotosResults;
+      // create images using saved data
+      makeImages(imageData, 'recent-gallery__photo');
+   } catch (error) {
+      console.error(error);
+   }
+}
+
+
+categoryBox.forEach(el => {
+   el.addEventListener('click', clicked => {
+      // save clicked topic to variable
+      selectedTopic = clicked.target.textContent;
+      // make whole text lowecase
+      selectedTopic = selectedTopic.toLocaleLowerCase()
+      // reset image data array
+      imageData = [];
+      // clear last search
+      recentPhotos.innerHTML = '';
+      // remove pagination
+      pagination.style.display = 'none';
+      // add loader
+      loader.style.display = 'block';
+      // add home icon
+      homeIcon.style.display = 'block';
+      // add new margins to category elements
+      category.style.marginTop = '2rem';
+      category.style.marginBottom = '-2rem';
+      // render topic photos
+      if (selectedTopic.length > 0) {
+         topicPhotos(selectedTopic, currentPage);
+      }
+   })
+});
+
+
+const topicPhotos = async (topic, page) => {
+   try {
+      const topicHandler = await fetch(`https://api.unsplash.com/topics/${topic}/photos/?page=${page}&per_page=30&client_id=${api.clientId}`);
+      const topicPhotosResults = await topicHandler.json();
+      // display images using result data
+      displayImages(topicPhotosResults, topic);
+      
    } catch (error) {
       console.error(error);
    }

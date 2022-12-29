@@ -10,6 +10,7 @@
    --popup: rgb(172, 191, 224);
    --violet: rgb(156, 134, 172);
    --white: rgb(250, 250, 250);
+   --gray: rgb(193, 202, 216);
    --red: rgb(243, 83, 110);
    --icons: rgb(80, 85, 114);
 }
@@ -188,6 +189,33 @@ body {
    display: block;
    width: 2.5rem;
    height: 2.5rem;
+}
+
+.category {
+   display: flex;
+   align-items: center;
+   flex-wrap: wrap;
+   padding: 0 3em;
+   gap: 1em;
+   justify-content: center;
+   margin-top: -20rem;
+   margin-bottom: 12rem;
+   
+}
+
+.category-box {
+   border: none;
+   padding: 1em 2em;
+   font-size: 1.6rem;
+   color: var(--gray);
+   background: rgba(17, 16, 27, 0.6);
+   border-radius: 100px;
+   cursor: pointer;
+}
+
+.category-box:hover {
+   color: var(--gray);
+   background: rgb(113, 119, 151);
 }
 
 
@@ -601,6 +629,10 @@ footer {
       font-size: 2.3rem;
    }
 
+   .category-box {
+      font-size: 1.8rem;
+   }
+
    .recent-gallery__item {
       -webkit-box-flex: 1;
           -ms-flex: 1 1 33.333%;
@@ -667,6 +699,15 @@ footer {
 
    .search-form__btn {
       padding: 15px 20px;
+   }
+
+   .category {
+      margin-top: -17rem;
+      margin-bottom: 14rem;
+   }
+
+   .category-box {
+      font-size: 1.6rem;
    }
 
    .recent-gallery__item {
@@ -753,6 +794,12 @@ footer {
       transition: width 0s;
    }
 
+   .category {
+      margin-top: -12rem;
+      margin-bottom: 10rem;
+      padding: 0 2.5rem;
+   }
+
    .recent-gallery {
       padding: 1.5rem 2.5rem;
    }
@@ -767,5 +814,13 @@ footer {
 
    .pagination button {
       width: 90%;
+   }
+}
+
+@media only screen and (max-width: 360px) {
+   .category {
+      margin-top: -12rem;
+      margin-bottom: 8rem;
+      padding: 5px;
    }
 }
