@@ -61,6 +61,8 @@ const submitSearch = () => {
       homeIcon.style.display = 'block';
       //remove focus from input
       searchInput.blur();
+      // clear topics
+      selectedTopic = undefined;
       // do the search
       searchPhoto(searchQuery);
    });
@@ -127,10 +129,10 @@ loadMoreBtn.addEventListener('click', (e2) => {
    // load second page content
    currentPage++;
    // check if button should list search photos or topic photos
-   if (searchQuery.length > 0) {
-      searchPhoto(searchQuery, currentPage);
-   } else {
+   if (selectedTopic !== undefined) {
       topicPhotos(selectedTopic, currentPage);
+   } else {
+      searchPhoto(searchQuery, currentPage);
    }
 });
 
